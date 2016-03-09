@@ -12,9 +12,26 @@
     tools:context="com.artsam.ukrainian_tv.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp">
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:text="qwerty"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center" />
+
+    </android.support.v7.widget.CardView>
+
     <ListView
         android:id="@+id/lv_channels"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/card_category" />
 
 </RelativeLayout>

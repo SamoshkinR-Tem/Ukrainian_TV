@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity
     private MySimpleCursorAdapter mAdapter;
     private Menu mNavigationMenu;
     private Cursor mElected;
+    private TextView tvCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,9 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         mCategories = new HashMap<>();
+
+        tvCategory = (TextView) findViewById(R.id.tv_category);
+        tvCategory.setText(mCategory);
 
         getSupportLoaderManager().initLoader(ELECTED_LOADER, null, this);
 
@@ -102,15 +106,6 @@ public class MainActivity extends AppCompatActivity
         mLvChannels.setAdapter(mAdapter);
 
         getSupportLoaderManager().initLoader(CHANNELS_LOADER, null, this);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -150,8 +145,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                break;
             case R.id.action_sync:
                 new DownloadJsonTask().execute(URL_CATEGORY, URL_CHANNEL);
                 break;
@@ -175,8 +168,10 @@ public class MainActivity extends AppCompatActivity
         if (!String.valueOf(item.getTitle()).equals(getString(R.string.menu_item_elected))) {
             mCategory = String.valueOf(item.getTitle());
             getSupportLoaderManager().restartLoader(CHANNELS_LOADER, null, this);
+            tvCategory.setText(mCategory);
         } else {
             mAdapter.swapCursor(mElected);
+            tvCategory.setText(R.string.menu_item_elected);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -262,9 +257,9 @@ public class MainActivity extends AppCompatActivity
                             order[data.getPosition()],
                             itemTitle);
                 } while (data.moveToNext());
-            }
 
-//            getSupportLoaderManager().destroyLoader(CATEGORIES_LOADER);
+                getSupportLoaderManager().destroyLoader(CATEGORIES_LOADER);
+            }
         }
     }
 
