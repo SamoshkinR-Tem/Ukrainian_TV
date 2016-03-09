@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Ukrainian_tv</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_sync">Sync</string>
+    <string name="action_clear">Clear</string>
+
+    <string name="sync">Synchronize</string>
+    <string name="clear">Clear</string>
+
+    <string name="sw_tag_key"/>
+    <string name="menu_item_elected">Избранные</string>
+</resources>
